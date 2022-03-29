@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -26,6 +27,7 @@ type Options struct {
 	BaseURL  string `env:"JIRA_URL"`
 	Token    string `env:"JIRA_TOKEN"`
 	Username string `env:"JIRA_USERNAME"`
+	Projects string `env:"JIRA_PROJECTS"`
 }
 
 func init() {
@@ -47,7 +49,10 @@ func run() {
 
 	switch os.Args[1] {
 	case "search":
-		search(opts, strings.Join(os.Args[2:], " "))
+		queryStr := generateSearchQuery(opts, strings.Join(os.Args[2:], " "))
+		search(opts, queryStr)
+	case "search-by-key":
+		search(opts, fmt.Sprintf("key = %s", strings.Join(os.Args[2:], " ")))
 	default:
 		wf.Fatalf("No steps for command %s", os.Args[1])
 	}

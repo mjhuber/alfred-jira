@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"regexp"
 
 	jira "gopkg.in/andygrunwald/go-jira.v1"
 )
 
-func search(opt *Options, query string) {
+func search(opt *Options, input string) {
 	tp := jira.BasicAuthTransport{
 		Username: opt.Username,
 		Password: opt.Token,
@@ -24,14 +23,8 @@ func search(opt *Options, query string) {
 		return err
 	}
 
-	finalQuery := fmt.Sprintf("summary ~ '%s' OR description ~ '%s'", query, query)
+	err = client.Issue.SearchPages(input, nil, appendFunc)
 
-	if isPossiblyKey, _ := regexp.MatchString(`^[a-zA-z0-9]+-\d+$`, query); isPossiblyKey {
-		finalQuery += fmt.Sprintf(" OR key = %s", query)
-	}
-	finalQuery += " ORDER BY status"
-
-	err = client.Issue.SearchPages(finalQuery, nil, appendFunc)
 	if err != nil {
 		wf.Fatalf("Error searching jira: %s", err.Error())
 	}
@@ -43,4 +36,15 @@ func search(opt *Options, query string) {
 			Subtitle(issue.Key)
 	}
 	wf.SendFeedback()
+}
+
+func generateSearchQuery(opt *Options, input string) string {
+	query := fmt.Sprintf("(summary ~ '%s' OR description ~ '%s')", input, input)
+
+	if opt.Projects != "" {
+		query += fmt.Sprintf(" AND project IN (%s)", opt.Projects)
+	}
+
+	query += " ORDER BY status"
+	return query
 }

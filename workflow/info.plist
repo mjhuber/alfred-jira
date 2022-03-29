@@ -6,6 +6,19 @@
 	<string>mjhuber.alfredapp.jira</string>
 	<key>connections</key>
 	<dict>
+		<key>509F6146-4C44-4B8C-9F7F-2A484AA88043</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>293DE42A-9175-475A-A919-97F1FB95708D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>86AA582E-F5A3-4034-B0F5-27DB53B64583</key>
 		<array>
 			<dict>
@@ -50,7 +63,7 @@
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
-				<true/>
+				<false/>
 				<key>queuedelaymode</key>
 				<integer>1</integer>
 				<key>queuemode</key>
@@ -58,7 +71,7 @@
 				<key>runningsubtext</key>
 				<string>Searching....</string>
 				<key>script</key>
-				<string>./alfred-jira search "{query}"</string>
+				<string>./alfred-jira search-by-key "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -66,7 +79,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search Confluence</string>
+				<string>Search Jira by Issue Number</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -98,6 +111,55 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>1</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>jiras</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching....</string>
+				<key>script</key>
+				<string>./alfred-jira search "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Jira</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>509F6146-4C44-4B8C-9F7F-2A484AA88043</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -106,20 +168,29 @@
 		<key>293DE42A-9175-475A-A919-97F1FB95708D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>385</integer>
+			<integer>595</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>185</integer>
+		</dict>
+		<key>509F6146-4C44-4B8C-9F7F-2A484AA88043</key>
+		<dict>
+			<key>xpos</key>
+			<integer>145</integer>
+			<key>ypos</key>
+			<integer>185</integer>
 		</dict>
 		<key>86AA582E-F5A3-4034-B0F5-27DB53B64583</key>
 		<dict>
 			<key>xpos</key>
-			<integer>150</integer>
+			<integer>140</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>50</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
 	<dict>
+		<key>JIRA_PROJECTS</key>
+		<string></string>
 		<key>JIRA_TOKEN</key>
 		<string></string>
 		<key>JIRA_URL</key>
@@ -129,9 +200,10 @@
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>JIRA_USERNAME</string>
+		<string>JIRA_PROJECTS</string>
 		<string>JIRA_TOKEN</string>
 		<string>JIRA_URL</string>
+		<string>JIRA_USERNAME</string>
 	</array>
 	<key>version</key>
 	<string>1.0.0</string>
