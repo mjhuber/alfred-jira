@@ -200,10 +200,10 @@
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>JIRA_PROJECTS</string>
+		<string>JIRA_USERNAME</string>
 		<string>JIRA_TOKEN</string>
 		<string>JIRA_URL</string>
-		<string>JIRA_USERNAME</string>
+		<string>JIRA_PROJECTS</string>
 	</array>
 	<key>version</key>
 	<string>1.0.0</string>
